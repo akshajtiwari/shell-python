@@ -1,34 +1,102 @@
-[![progress-banner](https://backend.codecrafters.io/progress/shell/ba976af5-fab2-4e88-a14f-a6ed0e0d9a51)](https://app.codecrafters.io/users/codecrafters-bot?r=2qF)
+Custom Shell
 
-This is a starting point for Python solutions to the
-["Build Your Own Shell" Challenge](https://app.codecrafters.io/courses/shell/overview).
+A simple custom shell implemented in Python that supports basic shell commands like `cd`, `pwd`, `echo`, `type`, and external commands found in the system `PATH`.
 
-In this challenge, you'll build your own POSIX compliant shell that's capable of
-interpreting shell commands, running external programs and builtin commands like
-cd, pwd, echo and more. Along the way, you'll learn about shell command parsing,
-REPLs, builtin commands, and more.
+About This Project
+This is a personal project created while learning Python and gaining Linux experience. It serves as a foundational step in understanding shell functionality and command execution.
 
-**Note**: If you're viewing this repo on GitHub, head over to
-[codecrafters.io](https://codecrafters.io) to try the challenge.
+Features
 
-# Passing the first stage
+- Basic Command Execution: Runs system commands found in `PATH`.
+- Built-in Commands:
+  - `cd`: Change directory (supports `cd ~` and relative/absolute paths).
+  - `pwd`: Print the current working directory.
+  - `echo`: Print given arguments.
+  - `type`: Identify if a command is built-in or external.
+  - `exit 0`: Exit the shell.
+- Error Handling: Provides appropriate error messages for invalid commands and missing directories.
+- Interactive Prompt: Displays a `$ ` prompt for user input.
 
-The entry point for your `shell` implementation is in `app/main.py`. Study and
-uncomment the relevant code, and push your changes to pass the first stage:
+ Installation
+
+To use this shell, ensure you have Python installed (preferably Python 3.x). Clone this repository and navigate to the directory:
 
 ```sh
-git commit -am "pass 1st stage" # any msg
-git push origin master
+$ git clone https://github.com/your-username/custom-shell.git
+$ cd custom-shell
 ```
 
-Time to move on to the next stage!
+Usage
 
-# Stage 2 & beyond
+Run the shell using:
 
-Note: This section is for stages 2 and beyond.
+```sh
+$ python3 shell.py
+```
 
-1. Ensure you have `python (3.11)` installed locally
-1. Run `./your_program.sh` to run your program, which is implemented in
-   `app/main.py`.
-1. Commit your changes and run `git push origin master` to submit your solution
-   to CodeCrafters. Test output will be streamed to your terminal.
+ Supported Commands
+
+ Built-in Commands:
+- `pwd`: Prints the current directory.
+  ```sh
+  $ pwd
+  /home/user
+  ```
+- `cd [directory]`: Changes the directory.
+  ```sh
+  $ cd Documents
+  $ pwd
+  /home/user/Documents
+  ```
+- `cd ~`: Moves to the home directory.
+  ```sh
+  $ cd ~
+  $ pwd
+  /home/user
+  ```
+- `echo [text]`: Prints text to the screen.
+  ```sh
+  $ echo Hello, World!
+  Hello, World!
+  ```
+- `type [command]`: Identifies if a command is built-in or external.
+  ```sh
+  $ type echo
+  echo is a shell builtin
+  ```
+- `exit 0`: Exits the shell.
+  ```sh
+  $ exit 0
+  ```
+
+External Commands:
+The shell supports running any executable available in the system `PATH`. Examples:
+```sh
+$ ls
+$ uname -a
+$ python3 --version
+```
+
+How It Works
+
+1. Command Parsing: The shell reads user input and processes it using `shlex.split()` to correctly handle quoted arguments.
+2. Execution Flow:
+   - If the command is built-in, it is executed directly.
+   - Otherwise, it checks if the command exists in `PATH` and executes it using `subprocess.run()`.
+3. Error Handling:
+   - Invalid commands return a `command not found` error.
+   - Directory changes (`cd`) validate paths before executing.
+
+Future Enhancements
+- Implement support for environment variables.
+- Add piping and redirection.
+- Improve error handling and user experience.
+- Implement a history feature.
+
+Contributing
+Contributions are welcome! If you have suggestions or improvements, feel free to open an issue or submit a pull request.
+
+
+
+Made with ❤️ by AKSHAJ TIWARI
+
